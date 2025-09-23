@@ -4,7 +4,7 @@ description = "Add your description here"
 name = "uv-python-workflow"
 readme = "README.md"
 requires-python = ">=3.12"
-version = "0.1.0"
+version = "0.2.0"
 
 [dependency-groups]
 dev = [
@@ -21,7 +21,7 @@ major_version_zero = true
 name = "cz_conventional_commits"
 tag_format = "v$version"
 update_changelog_on_bump = true
-version_provider = "pyproject"
+version_provider = "pep621"
 version_scheme = "pep440"
 
 [tool.ruff] # https://docs.astral.sh/ruff/settings/#top-level
