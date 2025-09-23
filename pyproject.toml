@@ -1,0 +1,122 @@
+[project]
+dependencies = []
+description = "Add your description here"
+name = "uv-python-workflow"
+readme = "README.md"
+requires-python = ">=3.12"
+version = "0.1.0"
+
+[dependency-groups]
+dev = [
+  "commitizen>=4.9.1",
+  "pre-commit>=4.3.0",
+  "pyright[nodejs]>=1.1.405",
+  "pytest>=8.4.2",
+  "pytest-cov>=7.0.0",
+  "pytest-sugar>=1.1.1",
+]
+
+[tool.commitizen]
+major_version_zero = true
+name = "cz_conventional_commits"
+tag_format = "v$version"
+update_changelog_on_bump = true
+version_provider = "pyproject"
+version_scheme = "pep440"
+
+[tool.ruff] # https://docs.astral.sh/ruff/settings/#top-level
+exclude = [".venv"]
+line-length = 100
+
+[tool.ruff.lint] # https://docs.astral.sh/ruff/settings/#lint
+extend-select = [
+  "FAST001", # fast-api-redundant-response-model
+  "FAST002", # fast-api-non-annotated-dependency
+  "D100", # missing-module-docstring
+  "D101", # undocumented-public-class
+  "D102", # missing-class-docstring
+  "D103", # undocumented-public-function
+  "D213", # multi-line-summary-second-line
+  "D400", # missing-trailing-period
+  "ERA001", # commented-out-code
+]
+select = [
+  "B", # flake8-bugbear
+  "E", # pycodestyle
+  "F", # pyflakes
+  "I", # isort
+  "S", # bandit
+  "W", # pycodestyle
+  "UP", # pyupgrade
+  "C4", # flake8-comprehensions
+  "ANN", # flake8-annotations
+  "TRY", # tryceratops
+  "PERF", # perflint
+  "ASYNC", # flake8-async
+]
+
+# Globally ignore noisy rules (example)
+ignore = [
+  "E402", # module level import not at top of file
+  "TRY003", # Avoid specifying long messages outside the exception class
+  "TRY301", # Abstract `raise` to an inner function
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = [
+  "S101", # Allow use of assert statements in tests
+  "S105", # hardcoded-password-string
+  "S106", # hardcoded-password-func-arg
+]
+
+[tool.ruff.format] # https://docs.astral.sh/ruff/settings/#format
+quote-style = "double" # Quote style, double quotes are default
+
+[tool.coverage.run]
+branch = true
+omit = [
+  "tests/*",
+  ".venv/*",
+]
+source = ["src"]
+
+[tool.coverage.report]
+exclude_also = [
+  "def __repr__",
+  "if self\\.debug",
+  "raise AssertionError",
+  "raise NotImplementedError",
+  "if 0:",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+  "class .*\\bProtocol\\):",
+  "@(abc\\.)?abstractmethod",
+]
+ignore_errors = true
+show_missing = true
+# skip_covered = true
+
+[tool.coverage.xml]
+output = "coverage.xml"
+
+[tool.coverage.html] #  pytest --cov=src --cov-report=html
+directory = "coverage_html_report"
+show_contexts = true
+title = "Coverage Report"
+
+[tool.pytest.ini_options]
+addopts = "-ra --strict-config --strict-markers --cov=src --cov-report=xml --cov-report=term-missing"
+filterwarnings = ["error"]
+markers = [
+  "asyncio: marks tests as asyncio tests",
+]
+python_files = ["test_*.py"]
+testpaths = ["tests"]
+
+[tool.pyright]
+exclude = [
+  ".venv",
+]
+typeCheckingMode = "basic"
+venv = ".venv"
+venvPath = "."
