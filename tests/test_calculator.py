@@ -4,7 +4,7 @@ import math
 
 import pytest
 
-from src.calculator import add, divide, multiply, subtract
+from src.calculator import add, divide, multiply, power, subtract
 
 
 def test_add() -> None:
@@ -35,3 +35,23 @@ def test_divide_by_zero() -> None:
     """divide raises ZeroDivisionError when dividing by zero."""
     with pytest.raises(ZeroDivisionError):
         divide(1, 0)
+
+
+def test_power_integers() -> None:
+    """power returns correct results for integer base and exponent."""
+    assert power(2, 3) == 8
+    assert power(5, 0) == 1
+    assert power(-2, 4) == 16
+    assert power(-2, 3) == -8
+
+
+def test_power_floats() -> None:
+    """power returns correct results for float exponents where applicable."""
+    assert math.isclose(power(9, 0.5), 3.0)
+    assert math.isclose(power(16.0, 0.25), 2.0)
+
+
+def test_power_invalid_fractional_negative_base() -> None:
+    """power raises ValueError for fractional exponent on negative base (non-real)."""
+    with pytest.raises(ValueError):
+        power(-8, 1 / 3)
