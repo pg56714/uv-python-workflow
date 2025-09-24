@@ -14,11 +14,34 @@ This template integrates **CI/CD, Docker, pre-commit hooks, and Pyright type che
 ## 📦 Getting Started
 
 ```bash
+uv venv
+
 # Install dependencies
 uv sync
 
 # Run app
 uv run main.py
+```
+
+## 🔄 CI/CD
+
+- Dependency install with `uv`
+- Linting & formatting with `ruff`
+- Type checking with `pyright`
+- Tests with `pytest`
+- Bump version with `commitizen`
+
+## 🧭 Commitizen (Conventional Commits)
+
+```powershell
+# Install (dev)
+uv add --dev commitizen
+
+# Stage changes
+git add .
+
+# Interactive commit
+cz commit or cz c
 ```
 
 ## 🧹 Pre-commit Hooks
@@ -35,29 +58,4 @@ pre-commit run --all-files  # Run all hooks on all files (only needed once after
 ```bash
 docker build -t uv-python-workflow .
 docker run --rm uv-python-workflow
-```
-
-## 🔄 CI/CD
-
-GitHub Actions workflow (`.github/workflows/ci.yml`) runs:
-
-- Dependency install with `uv`
-- Linting & formatting with `ruff`
-- Type checking with `pyright`
-- Tests with `pytest`
-
-## 🧭 Commitizen (Conventional Commits)
-
-```powershell
-# Install (dev)
-uv add --dev commitizen
-
-# Stage changes
-git add .
-
-# Interactive commit
-cz commit or cz c
-
-# Semantic version bump + tag (optional)
-cz bump --yes
 ```
