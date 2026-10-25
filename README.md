@@ -25,8 +25,8 @@ uv run main.py
 
 ## 🔄 CI/CD
 
-- Dependency install with `uv`
-- Linting & formatting with `ruff`
+- Dependency install with `uv` (`uv sync --locked`)
+- Linting & format check with `ruff` (CI only checks; it does not rewrite files)
 - Type checking with `pyright`
 - Tests with `pytest`
 - Bump version with `commitizen`
@@ -59,3 +59,5 @@ pre-commit run --all-files  # Run all hooks on all files (only needed once after
 docker build -t uv-python-workflow .
 docker run --rm uv-python-workflow
 ```
+
+The image uses a pinned `python:3.12-slim` base with a pinned `uv` binary, installs only locked runtime dependencies (`uv sync --locked --no-dev`), and runs as a non-root user.
