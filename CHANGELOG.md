@@ -1,3 +1,9 @@
+## 0.3.1 (2026-10-30)
+
+### Fix
+
+- **deps**: upgrade dev tools and align workflow with dcex
+
 ## 0.3.0 (2025-09-24)
 
 ### Feat
